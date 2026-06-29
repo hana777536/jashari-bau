@@ -35,11 +35,26 @@
         <h2>Jashari-Bau</h2>
       </div>
 
-      <nav class="nav-links">
-        <a href="./index.html" class="active">Startseite</a>
+      <nav class="nav-links" id="site-navigation">
+        <a href="./index.html">Startseite</a>
         <a href="./about-service.html">Über uns</a>
-        <a href="./contact.html">Kontakt</a>
+        <div class="nav-dropdown">
+          <button class="dropdown-toggle" type="button" aria-expanded="false">
+            Leistungen
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="./about-service.html#leistungen">Heizung & Sanitär</a>
+            <a href="./about-service.html#ablauf">Unser Ablauf</a>
+            <a href="./contact.html">Angebot anfragen</a>
+          </div>
+        </div>
+        <a href="./contact.html" class="active">Kontakt</a>
       </nav>
+
+      <button class="menu-toggle" type="button" aria-label="Navigation öffnen" aria-controls="site-navigation" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
       <a href="tel:+4917642923855" class="call-btn">
         <i class="fa-solid fa-phone"></i>
