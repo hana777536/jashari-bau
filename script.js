@@ -1,16 +1,34 @@
 
-// Small interactive behaviours for the site
 document.addEventListener('DOMContentLoaded', function () {
 	const navbar = document.querySelector('.navbar');
 	const menuToggle = document.querySelector('.menu-toggle');
 	const navLinks = document.querySelector('.nav-links');
 	const dropdowns = document.querySelectorAll('.nav-dropdown');
+	const themeToggle = document.querySelector('.theme-toggle');
 
 	function closeDropdowns() {
 		dropdowns.forEach(dropdown => {
 			dropdown.classList.remove('is-open');
 			const button = dropdown.querySelector('.dropdown-toggle');
 			if (button) button.setAttribute('aria-expanded', 'false');
+		});
+	}
+
+	function setTheme(isLight) {
+		document.body.classList.toggle('light-mode', isLight);
+		localStorage.setItem('siteTheme', isLight ? 'light' : 'dark');
+
+		if (!themeToggle) return;
+		themeToggle.setAttribute('aria-pressed', String(isLight));
+		themeToggle.setAttribute('aria-label', isLight ? 'Dunkelmodus aktivieren' : 'Hellmodus aktivieren');
+		themeToggle.innerHTML = isLight ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+	}
+
+	if (themeToggle) {
+		setTheme(localStorage.getItem('siteTheme') === 'light');
+
+		themeToggle.addEventListener('click', () => {
+			setTheme(!document.body.classList.contains('light-mode'));
 		});
 	}
 
@@ -152,6 +170,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		.service-card, .process-card, .why-card, .stat-card{ opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
 		.is-visible{ opacity: 1; transform: translateY(0); }
 		.site-toast{ transition: opacity .4s ease; }
+		.dark-mode{ background: #121212; color: #f4f4f4; }
+		.dark-mode a{ color: #9ecfff; }
+		.dark-mode-toggle{ appearance: none; border: 1px solid rgba(255,255,255,.5); background: rgba(255,255,255,.08); color: #fff; padding: 8px 12px; border-radius: 999px; cursor: pointer; margin-left: 12px; }
+		.dark-mode-toggle:hover{ background: rgba(255,255,255,.18); }
 	`;
 	const s = document.createElement('style'); s.appendChild(document.createTextNode(css)); document.head.appendChild(s);
 })();
