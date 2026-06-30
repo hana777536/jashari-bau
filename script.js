@@ -112,6 +112,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			const el = entry.target.querySelector('h2');
 			if (!el) return;
 			const raw = el.textContent.trim();
+
+if (raw === "12/6") {
+    obs.unobserve(entry.target);
+    return;
+}
 			// extract numeric part
 			const num = parseInt(raw.replace(/[^0-9]/g, '')) || 0;
 			const duration = 1200;
